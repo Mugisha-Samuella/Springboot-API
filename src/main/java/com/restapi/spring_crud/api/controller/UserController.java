@@ -22,9 +22,6 @@ public class UserController {
     @GetMapping("/user")
     public User getUser(@RequestParam Integer id) {
         Optional<User> user = userService.getUser(id);
-        if(user.isPresent()){
-            return (User) user.get();
-        }
-        return null;
+        return (User) user.orElse(null);
     }
 }

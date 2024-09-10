@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table (name = "employees")
-public class User {
+public class Employee {
 
     @Id @GeneratedValue
     private long id;

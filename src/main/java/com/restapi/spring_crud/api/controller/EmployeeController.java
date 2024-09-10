@@ -3,9 +3,7 @@ package com.restapi.spring_crud.api.controller;
 import com.restapi.spring_crud.api.model.Employee;
 import com.restapi.spring_crud.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
@@ -18,4 +16,9 @@ public class EmployeeController {
     public List<Employee> getAllEmployees(){
         return employeeRepository.findAll();
     }
+
+    @PostMapping
+   public Employee createEmployee(@RequestBody Employee employee){
+        return employeeRepository.save(employee);
+   }
 }

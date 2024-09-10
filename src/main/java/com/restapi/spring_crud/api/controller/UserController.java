@@ -11,17 +11,17 @@ import java.util.Optional;
 
 @RestController
 public class UserController {
-
-    private final UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @GetMapping("/user")
-    public User getUser(@RequestParam Integer id) {
-        Optional<User> user = userService.getUser(id);
-        return (User) user.orElse(null);
-    }
+//
+//    private final UserService userService;
+//
+//    @Autowired
+//    public UserController(UserService userService) {
+//        this.userService = userService;
+//    }
+//
+//    @GetMapping("/user")
+//    public User getUser(@RequestParam Integer id) {
+//        Optional<User> user = userService.getUser(id);
+//        return (User) user.orElse(null);
+//    }
 }

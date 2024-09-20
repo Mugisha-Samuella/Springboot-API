@@ -31,7 +31,6 @@ public class EmployeeController {
     public ResponseEntity<Employee> getEmployeeById(@PathVariable long id){
         Employee employee =employeeRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Employee with id " + id + " not found"));
-
         return ResponseEntity.ok(employee);
     }
 
@@ -46,7 +45,6 @@ public class EmployeeController {
 
         employeeRepository.save(updateEmployee);
         return ResponseEntity.ok(updateEmployee);
-
     }
 
     @DeleteMapping("{id}")
@@ -57,7 +55,5 @@ public class EmployeeController {
         employeeRepository.delete(employee);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-
 
 }

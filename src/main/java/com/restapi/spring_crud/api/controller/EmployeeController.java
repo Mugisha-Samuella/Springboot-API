@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/employees")
@@ -23,8 +24,14 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee createEmployee(@RequestBody Employee employee){
-        return employeeRepository.save(employee);
+    public ResponseEntity<String> createEmployee(@RequestBody Employee employee){
+        Optional<Employee> employeeOptional = employeeRepository.findEmployeeByEmail(employee.getEmail());
+        if(employeeOptional.isPresent()){
+            return ResponseEntity.ok("Employee with Email: " + employee.getEmail() + " already exists");
+        }
+        employeeRepository.save(employee);
+
+        return ResponseEntity.ok("Employee created successfully!");
     }
 
     @GetMapping("{id}")

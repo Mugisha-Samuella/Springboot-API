@@ -49,9 +49,13 @@ public class EmployeeController {
         if(isNullOrEmpty(employee.getLastName())){
             validationMessages.add("Last name is required! \n");
         }
+        if(isNullOrEmpty(employee.getEmployeeTitle())){
+            validationMessages.add("Employee Title is required! \n");
+        }
         if(isNullOrEmpty(employee.getEmail())){
             validationMessages.add("Email is required! \n");
         }
+
         if(!validationMessages.isEmpty()){
             return ResponseEntity.ok(String.join(" ", validationMessages));
         }
@@ -79,6 +83,7 @@ public class EmployeeController {
         updateEmployee.setFirstName(employeeDetails.getFirstName());
         updateEmployee.setLastName(employeeDetails.getLastName());
         updateEmployee.setEmail(employeeDetails.getEmail());
+        updateEmployee.setEmployeeTitle(employeeDetails.getEmployeeTitle());
 
         employeeRepository.save(updateEmployee);
         return ResponseEntity.ok(updateEmployee);

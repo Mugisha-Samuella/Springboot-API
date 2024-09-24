@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @Table (name = "employees")
 public class Employee {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long id;
 
     @Column (name = "firstname")

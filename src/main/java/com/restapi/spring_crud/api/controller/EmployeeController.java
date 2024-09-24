@@ -4,6 +4,8 @@ import com.restapi.spring_crud.api.model.Employee;
 import com.restapi.spring_crud.exception.ResourceNotFoundException;
 import com.restapi.spring_crud.repository.EmployeeRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,27 +16,36 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/employees")
 public class EmployeeController {
 
-    @Autowired
-    public EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @GetMapping
     public List<Employee> getAllEmployees(){
         return employeeRepository.findAll();
     }
 
+    @GetMapping("/test")
+    public String test(){
+        System.out.println("Hello from frontend.");
+        return "Samuellla";
+    }
+
     @PostMapping
-    public ResponseEntity<String> createEmployee(@RequestBody Employee employee){
-        Optional<Employee> employeeOptional = employeeRepository.findEmployeeByEmail(employee.getEmail());
+    public ResponseEntity<String> createEmployee(@RequestBody Employee employee)throws Exception{
+
 
         ResponseEntity<String> validationResponse = validateEmployee(employee);
         if(validationResponse != null){
                   return validationResponse;
-              }
+        }
 
-
+        Optional<Employee> employeeOptional = employeeRepository.findByEmail(employee.getEmail());
+        if(employeeOptional.isPresent()){
+            throw new BadRequestException("Employee already exists.");
+        }
         employeeRepository.save(employee);
 
         return ResponseEntity.ok("Employee created successfully!");
@@ -64,7 +75,7 @@ public class EmployeeController {
     }
 
     private boolean isNullOrEmpty(String value){
-        return value == null || value.isEmpty();
+        return value == null || value.isEmpty() || value.equals("");
     }
 
     @GetMapping("{id}")

@@ -1,4 +1,4 @@
-package com.restapi.spring_crud.api.model;
+package com.restapi.spring_crud.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -16,6 +16,9 @@ public class Employee {
     @GeneratedValue
     private long id;
 
+    @Column(name = "photourl")
+    private String photoUrl;
+
     @Column (name = "firstname")
     private String firstName;
 
@@ -24,6 +27,12 @@ public class Employee {
 
     @Column (name = "employeetitle")
     private String employeeTitle;
+
+    @Column (name = "employeedepartment")
+    private String employeeDepartment;
+
+    @Column (name = "status")
+    private String status;
 
     @Column (name = "email")
     private String email;

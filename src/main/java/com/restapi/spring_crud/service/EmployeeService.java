@@ -1,6 +1,5 @@
 package com.restapi.spring_crud.service;
 
-import com.restapi.spring_crud.api.model.Employee;
 import com.restapi.spring_crud.exception.ResourceNotFoundException;
 import com.restapi.spring_crud.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import com.restapi.spring_crud.model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +18,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class EmployeeService {
+
 
     private final EmployeeRepository employeeRepository;
 
@@ -61,7 +62,6 @@ public class EmployeeService {
         if(isNullOrEmpty(employee.getEmail())){
             validationMessages.add("Email is required! \n");
         }
-
         if(!validationMessages.isEmpty()){
             return ResponseEntity.ok(String.join(" ", validationMessages));
         }
@@ -82,6 +82,9 @@ public class EmployeeService {
         employeeUpdate.setFirstName(employeeDetails.getFirstName());
         employeeUpdate.setLastName(employeeDetails.getLastName());
         employeeUpdate.setEmail(employeeDetails.getEmail());
+        employeeUpdate.setPhotoUrl(employeeDetails.getPhotoUrl());
+        employeeUpdate.setEmployeeDepartment(employeeDetails.getEmployeeDepartment());
+        employeeUpdate.setStatus(employeeDetails.getStatus());
         employeeUpdate.setEmployeeTitle(employeeDetails.getEmployeeTitle());
 
         employeeRepository.save(employeeUpdate);

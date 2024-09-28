@@ -1,8 +1,5 @@
 package com.restapi.spring_crud;
 
-import com.restapi.spring_crud.api.model.Employee;
-import com.restapi.spring_crud.repository.EmployeeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,6 +1,6 @@
 package com.restapi.spring_crud.repository;
 
-import com.restapi.spring_crud.api.model.Employee;
+import com.restapi.spring_crud.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

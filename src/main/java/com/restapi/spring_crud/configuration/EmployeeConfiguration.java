@@ -1,6 +1,5 @@
 package com.restapi.spring_crud.configuration;
 
-import com.restapi.spring_crud.api.model.Employee;
 import com.restapi.spring_crud.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

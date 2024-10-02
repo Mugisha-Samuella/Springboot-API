@@ -1,6 +1,6 @@
 package com.restapi.spring_crud.service;
 
-import com.restapi.spring_crud.exception.ResourceNotFoundException;
+import com.restapi.spring_crud.exception.GlobalExceptionHandler;
 import com.restapi.spring_crud.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.BadRequestException;
@@ -28,7 +28,7 @@ public class EmployeeService {
 
     public Employee getEmployeeById(long id){
         return employeeRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Employee with id " + id + " not found!"));
+                .orElseThrow(()-> new Reso("Employee with id " + id + " not found!"));
     }
 
     public ResponseEntity<String> createEmployee(@RequestBody Employee employee)throws Exception{
@@ -77,7 +77,7 @@ public class EmployeeService {
 
     public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employeeDetails){
         Employee employeeUpdate = employeeRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Employee with id " + id + " not found!"));
+                .orElseThrow(()-> new GlobalExceptionHandler("Employee with id " + id + " not found!"));
 
         employeeUpdate.setFirstName(employeeDetails.getFirstName());
         employeeUpdate.setLastName(employeeDetails.getLastName());
@@ -93,7 +93,7 @@ public class EmployeeService {
 
     public ResponseEntity<HttpStatus> deleteEmployeeByID(@PathVariable long id){
         Employee employee = employeeRepository.findById(id)
-                .orElseThrow(()-> new ResourceNotFoundException("Employee with id " + id + " not found!"));
+                .orElseThrow(()-> new GlobalExceptionHandler("Employee with id " + id + " not found!"));
 
         employeeRepository.delete(employee);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

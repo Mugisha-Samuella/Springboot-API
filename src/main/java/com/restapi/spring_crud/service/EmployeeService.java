@@ -28,7 +28,7 @@ public class EmployeeService {
 
     public Employee getEmployeeById(long id){
         return employeeRepository.findById(id)
-                .orElseThrow(()-> new Reso("Employee with id " + id + " not found!"));
+                .orElseThrow(()-> new GlobalExceptionHandler("Employee with id " + id + " not found!"));
     }
 
     public ResponseEntity<String> createEmployee(@RequestBody Employee employee)throws Exception{

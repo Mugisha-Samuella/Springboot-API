@@ -14,4 +14,19 @@ public class GlobalExceptionHandler{
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<String> handleBadRequestException(BadRequestException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EmailExistsException.class)
+    public ResponseEntity<String> handleEmailExistsException(EmailExistsException ex){
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.I_AM_A_TEAPOT);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public  ResponseEntity<String> handleInternalServerException(Exception ex){
+        return new ResponseEntity<>("Internal Server Error" + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }

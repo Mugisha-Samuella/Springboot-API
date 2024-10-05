@@ -5,11 +5,13 @@ import com.restapi.spring_crud.model.Employee;
 import com.restapi.spring_crud.service.EmployeeService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,18 +33,25 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createEmployee(@RequestBody Employee employee) throws Exception {
-        return employeeService.createEmployee(employee);
+    public ResponseEntity<String> createEmployee(@RequestBody Employee employee) throws BadRequestException {
+        if(employee == null){
+            throw new BadRequestException("Invalid Employee data");
+        }
+        employeeService.createEmployee(employee);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Employee created successfully!");
+
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable long id){
-        Employee employee = employeeService.getEmployeeById(id);
+        Optional<Employee> employeeOptional = employeeService.getEmployeeById(id);
 
-        if (employee == null){
+        if (employeeOptional.isPresent()){
+            return ResponseEntity.ok(employeeOptional.get());
+        }else{
             throw new EmployeeNotFoundException("Employee with id " + id + " not found");
         }
-        return ResponseEntity.ok(employee);
+
     }
 
     @Transactional

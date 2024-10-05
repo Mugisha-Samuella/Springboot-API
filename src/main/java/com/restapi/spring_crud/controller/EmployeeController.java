@@ -1,5 +1,6 @@
 package com.restapi.spring_crud.controller;
 
+import com.restapi.spring_crud.exception.EmployeeNotFoundException;
 import com.restapi.spring_crud.model.Employee;
 import com.restapi.spring_crud.service.EmployeeService;
 import jakarta.transaction.Transactional;
@@ -37,6 +38,10 @@ public class EmployeeController {
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable long id){
         Employee employee = employeeService.getEmployeeById(id);
+
+        if (employee == null){
+            throw new EmployeeNotFoundException("Employee with id " + id + " not found");
+        }
         return ResponseEntity.ok(employee);
     }
 

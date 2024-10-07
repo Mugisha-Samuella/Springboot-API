@@ -21,7 +21,7 @@ public class GlobalExceptionHandler{
 
     @ExceptionHandler(EmailExistsException.class)
     public ResponseEntity<String> handleEmailExistsException(EmailExistsException ex){
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.I_AM_A_TEAPOT);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.OK);
     }
 
     @ExceptionHandler(Exception.class)

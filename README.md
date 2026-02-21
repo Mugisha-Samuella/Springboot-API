@@ -1,4 +1,4 @@
-# Employee Management System - REST API
+# Employee Management System: REST API
 
 This project implements CRUD (Create, Read, Update, Delete) operations for managing employees, using RESTful APIs in Java with Spring Boot. The system allows users to create, view, update, and delete employee records in a database.
 
@@ -81,9 +81,9 @@ This project implements CRUD (Create, Read, Update, Delete) operations for manag
 - **Request Body**:
    ```json
    {
-     "firstName": "John",
-     "lastName": "Doe",
-     "email": "john.doe@example.com",
+     "firstName": "user_firstname",
+     "lastName": "user_lastName",
+     "email": "user.me@example.com",
      "position": "Software Engineer"
    }
    ```
@@ -108,9 +108,9 @@ This project implements CRUD (Create, Read, Update, Delete) operations for manag
 - **Request Body**:
    ```json
    {
-     "firstName": "Jane",
-     "lastName": "Doe",
-     "email": "jane.doe@example.com",
+     "firstName": "user",
+     "lastName": "name",
+     "email": "user.me@example.com",
      "position": "Manager"
    }
    ```
